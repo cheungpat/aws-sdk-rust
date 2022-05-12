@@ -2549,6 +2549,142 @@ impl AsRef<str> for AlgorithmSpec {
 
 #[allow(missing_docs)] // documentation missing in model
 #[non_exhaustive]
+#[derive(std::clone::Clone, std::cmp::PartialEq)]
+pub struct RecipientInfo {
+    #[allow(missing_docs)] // documentation missing in model
+    pub attestation_document: std::option::Option<aws_smithy_types::Blob>,
+    #[allow(missing_docs)] // documentation missing in model
+    pub key_encryption_algorithm: std::option::Option<crate::model::KeyEncryptionAlgorithmType>,
+}
+impl RecipientInfo {
+    #[allow(missing_docs)] // documentation missing in model
+    pub fn attestation_document(&self) -> std::option::Option<&aws_smithy_types::Blob> {
+        self.attestation_document.as_ref()
+    }
+    #[allow(missing_docs)] // documentation missing in model
+    pub fn key_encryption_algorithm(
+        &self,
+    ) -> std::option::Option<&crate::model::KeyEncryptionAlgorithmType> {
+        self.key_encryption_algorithm.as_ref()
+    }
+}
+impl std::fmt::Debug for RecipientInfo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatter = f.debug_struct("RecipientInfo");
+        formatter.field("attestation_document", &self.attestation_document);
+        formatter.field("key_encryption_algorithm", &self.key_encryption_algorithm);
+        formatter.finish()
+    }
+}
+/// See [`RecipientInfo`](crate::model::RecipientInfo)
+pub mod recipient_info {
+    /// A builder for [`RecipientInfo`](crate::model::RecipientInfo)
+    #[non_exhaustive]
+    #[derive(std::default::Default, std::clone::Clone, std::cmp::PartialEq, std::fmt::Debug)]
+    pub struct Builder {
+        pub(crate) attestation_document: std::option::Option<aws_smithy_types::Blob>,
+        pub(crate) key_encryption_algorithm:
+            std::option::Option<crate::model::KeyEncryptionAlgorithmType>,
+    }
+    impl Builder {
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn attestation_document(mut self, input: aws_smithy_types::Blob) -> Self {
+            self.attestation_document = Some(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_attestation_document(
+            mut self,
+            input: std::option::Option<aws_smithy_types::Blob>,
+        ) -> Self {
+            self.attestation_document = input;
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn key_encryption_algorithm(
+            mut self,
+            input: crate::model::KeyEncryptionAlgorithmType,
+        ) -> Self {
+            self.key_encryption_algorithm = Some(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_key_encryption_algorithm(
+            mut self,
+            input: std::option::Option<crate::model::KeyEncryptionAlgorithmType>,
+        ) -> Self {
+            self.key_encryption_algorithm = input;
+            self
+        }
+        /// Consumes the builder and constructs a [`RecipientInfo`](crate::model::RecipientInfo)
+        pub fn build(self) -> crate::model::RecipientInfo {
+            crate::model::RecipientInfo {
+                attestation_document: self.attestation_document,
+                key_encryption_algorithm: self.key_encryption_algorithm,
+            }
+        }
+    }
+}
+impl RecipientInfo {
+    /// Creates a new builder-style object to manufacture [`RecipientInfo`](crate::model::RecipientInfo)
+    pub fn builder() -> crate::model::recipient_info::Builder {
+        crate::model::recipient_info::Builder::default()
+    }
+}
+
+#[allow(missing_docs)] // documentation missing in model
+#[non_exhaustive]
+#[derive(
+    std::clone::Clone,
+    std::cmp::Eq,
+    std::cmp::Ord,
+    std::cmp::PartialEq,
+    std::cmp::PartialOrd,
+    std::fmt::Debug,
+    std::hash::Hash,
+)]
+pub enum KeyEncryptionAlgorithmType {
+    #[allow(missing_docs)] // documentation missing in model
+    RsaesOaepSha256,
+    /// Unknown contains new variants that have been added since this code was generated.
+    Unknown(String),
+}
+impl std::convert::From<&str> for KeyEncryptionAlgorithmType {
+    fn from(s: &str) -> Self {
+        match s {
+            "RSAES_OAEP_SHA_256" => KeyEncryptionAlgorithmType::RsaesOaepSha256,
+            other => KeyEncryptionAlgorithmType::Unknown(other.to_owned()),
+        }
+    }
+}
+impl std::str::FromStr for KeyEncryptionAlgorithmType {
+    type Err = std::convert::Infallible;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        Ok(KeyEncryptionAlgorithmType::from(s))
+    }
+}
+impl KeyEncryptionAlgorithmType {
+    /// Returns the `&str` value of the enum member.
+    pub fn as_str(&self) -> &str {
+        match self {
+            KeyEncryptionAlgorithmType::RsaesOaepSha256 => "RSAES_OAEP_SHA_256",
+            KeyEncryptionAlgorithmType::Unknown(s) => s.as_ref(),
+        }
+    }
+    /// Returns all the `&str` values of the enum members.
+    pub fn values() -> &'static [&'static str] {
+        &["RSAES_OAEP_SHA_256"]
+    }
+}
+impl AsRef<str> for KeyEncryptionAlgorithmType {
+    fn as_ref(&self) -> &str {
+        self.as_str()
+    }
+}
+
+#[allow(missing_docs)] // documentation missing in model
+#[non_exhaustive]
 #[derive(
     std::clone::Clone,
     std::cmp::Eq,

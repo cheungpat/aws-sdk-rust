@@ -1383,6 +1383,7 @@ pub mod decrypt_input {
         pub(crate) grant_tokens: std::option::Option<std::vec::Vec<std::string::String>>,
         pub(crate) key_id: std::option::Option<std::string::String>,
         pub(crate) encryption_algorithm: std::option::Option<crate::model::EncryptionAlgorithmSpec>,
+        pub(crate) recipient: std::option::Option<crate::model::RecipientInfo>,
     }
     impl Builder {
         /// <p>Ciphertext to be decrypted. The blob includes metadata.</p>
@@ -1498,6 +1499,19 @@ pub mod decrypt_input {
             self.encryption_algorithm = input;
             self
         }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn recipient(mut self, input: crate::model::RecipientInfo) -> Self {
+            self.recipient = Some(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_recipient(
+            mut self,
+            input: std::option::Option<crate::model::RecipientInfo>,
+        ) -> Self {
+            self.recipient = input;
+            self
+        }
         /// Consumes the builder and constructs a [`DecryptInput`](crate::input::DecryptInput)
         pub fn build(
             self,
@@ -1509,6 +1523,7 @@ pub mod decrypt_input {
                 grant_tokens: self.grant_tokens,
                 key_id: self.key_id,
                 encryption_algorithm: self.encryption_algorithm,
+                recipient: self.recipient,
             })
         }
     }
@@ -3462,6 +3477,7 @@ pub mod generate_data_key_input {
             std::collections::HashMap<std::string::String, std::string::String>,
         >,
         pub(crate) number_of_bytes: std::option::Option<i32>,
+        pub(crate) recipient: std::option::Option<crate::model::RecipientInfo>,
         pub(crate) key_spec: std::option::Option<crate::model::DataKeySpec>,
         pub(crate) grant_tokens: std::option::Option<std::vec::Vec<std::string::String>>,
     }
@@ -3535,6 +3551,19 @@ pub mod generate_data_key_input {
             self.number_of_bytes = input;
             self
         }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn recipient(mut self, input: crate::model::RecipientInfo) -> Self {
+            self.recipient = Some(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_recipient(
+            mut self,
+            input: std::option::Option<crate::model::RecipientInfo>,
+        ) -> Self {
+            self.recipient = input;
+            self
+        }
         /// <p>Specifies the length of the data key. Use <code>AES_128</code> to generate a 128-bit symmetric key, or <code>AES_256</code> to generate a 256-bit symmetric key.</p>
         /// <p>You must specify either the <code>KeySpec</code> or the <code>NumberOfBytes</code> parameter (but not both) in every <code>GenerateDataKey</code> request.</p>
         pub fn key_spec(mut self, input: crate::model::DataKeySpec) -> Self {
@@ -3582,6 +3611,7 @@ pub mod generate_data_key_input {
                 key_id: self.key_id,
                 encryption_context: self.encryption_context,
                 number_of_bytes: self.number_of_bytes,
+                recipient: self.recipient,
                 key_spec: self.key_spec,
                 grant_tokens: self.grant_tokens,
             })
@@ -4617,6 +4647,7 @@ pub mod generate_random_input {
     pub struct Builder {
         pub(crate) number_of_bytes: std::option::Option<i32>,
         pub(crate) custom_key_store_id: std::option::Option<std::string::String>,
+        pub(crate) recipient: std::option::Option<crate::model::RecipientInfo>,
     }
     impl Builder {
         /// <p>The length of the byte string.</p>
@@ -4642,6 +4673,19 @@ pub mod generate_random_input {
             self.custom_key_store_id = input;
             self
         }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn recipient(mut self, input: crate::model::RecipientInfo) -> Self {
+            self.recipient = Some(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_recipient(
+            mut self,
+            input: std::option::Option<crate::model::RecipientInfo>,
+        ) -> Self {
+            self.recipient = input;
+            self
+        }
         /// Consumes the builder and constructs a [`GenerateRandomInput`](crate::input::GenerateRandomInput)
         pub fn build(
             self,
@@ -4652,6 +4696,7 @@ pub mod generate_random_input {
             Ok(crate::input::GenerateRandomInput {
                 number_of_bytes: self.number_of_bytes,
                 custom_key_store_id: self.custom_key_store_id,
+                recipient: self.recipient,
             })
         }
     }
@@ -11352,6 +11397,8 @@ pub struct GenerateRandomInput {
     pub number_of_bytes: std::option::Option<i32>,
     /// <p>Generates the random byte string in the CloudHSM cluster that is associated with the specified <a href="https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html">custom key store</a>. To find the ID of a custom key store, use the <code>DescribeCustomKeyStores</code> operation.</p>
     pub custom_key_store_id: std::option::Option<std::string::String>,
+    #[allow(missing_docs)] // documentation missing in model
+    pub recipient: std::option::Option<crate::model::RecipientInfo>,
 }
 impl GenerateRandomInput {
     /// <p>The length of the byte string.</p>
@@ -11362,12 +11409,17 @@ impl GenerateRandomInput {
     pub fn custom_key_store_id(&self) -> std::option::Option<&str> {
         self.custom_key_store_id.as_deref()
     }
+    #[allow(missing_docs)] // documentation missing in model
+    pub fn recipient(&self) -> std::option::Option<&crate::model::RecipientInfo> {
+        self.recipient.as_ref()
+    }
 }
 impl std::fmt::Debug for GenerateRandomInput {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatter = f.debug_struct("GenerateRandomInput");
         formatter.field("number_of_bytes", &self.number_of_bytes);
         formatter.field("custom_key_store_id", &self.custom_key_store_id);
+        formatter.field("recipient", &self.recipient);
         formatter.finish()
     }
 }
@@ -11666,6 +11718,8 @@ pub struct GenerateDataKeyInput {
     /// <p>Specifies the length of the data key in bytes. For example, use the value 64 to generate a 512-bit data key (64 bytes is 512 bits). For 128-bit (16-byte) and 256-bit (32-byte) data keys, use the <code>KeySpec</code> parameter.</p>
     /// <p>You must specify either the <code>KeySpec</code> or the <code>NumberOfBytes</code> parameter (but not both) in every <code>GenerateDataKey</code> request.</p>
     pub number_of_bytes: std::option::Option<i32>,
+    #[allow(missing_docs)] // documentation missing in model
+    pub recipient: std::option::Option<crate::model::RecipientInfo>,
     /// <p>Specifies the length of the data key. Use <code>AES_128</code> to generate a 128-bit symmetric key, or <code>AES_256</code> to generate a 256-bit symmetric key.</p>
     /// <p>You must specify either the <code>KeySpec</code> or the <code>NumberOfBytes</code> parameter (but not both) in every <code>GenerateDataKey</code> request.</p>
     pub key_spec: std::option::Option<crate::model::DataKeySpec>,
@@ -11701,6 +11755,10 @@ impl GenerateDataKeyInput {
     pub fn number_of_bytes(&self) -> std::option::Option<i32> {
         self.number_of_bytes
     }
+    #[allow(missing_docs)] // documentation missing in model
+    pub fn recipient(&self) -> std::option::Option<&crate::model::RecipientInfo> {
+        self.recipient.as_ref()
+    }
     /// <p>Specifies the length of the data key. Use <code>AES_128</code> to generate a 128-bit symmetric key, or <code>AES_256</code> to generate a 256-bit symmetric key.</p>
     /// <p>You must specify either the <code>KeySpec</code> or the <code>NumberOfBytes</code> parameter (but not both) in every <code>GenerateDataKey</code> request.</p>
     pub fn key_spec(&self) -> std::option::Option<&crate::model::DataKeySpec> {
@@ -11718,6 +11776,7 @@ impl std::fmt::Debug for GenerateDataKeyInput {
         formatter.field("key_id", &self.key_id);
         formatter.field("encryption_context", &self.encryption_context);
         formatter.field("number_of_bytes", &self.number_of_bytes);
+        formatter.field("recipient", &self.recipient);
         formatter.field("key_spec", &self.key_spec);
         formatter.field("grant_tokens", &self.grant_tokens);
         formatter.finish()
@@ -12169,6 +12228,8 @@ pub struct DecryptInput {
     /// <p>Specifies the encryption algorithm that will be used to decrypt the ciphertext. Specify the same algorithm that was used to encrypt the data. If you specify a different algorithm, the <code>Decrypt</code> operation fails.</p>
     /// <p>This parameter is required only when the ciphertext was encrypted under an asymmetric KMS key. The default value, <code>SYMMETRIC_DEFAULT</code>, represents the only supported algorithm that is valid for symmetric encryption KMS keys.</p>
     pub encryption_algorithm: std::option::Option<crate::model::EncryptionAlgorithmSpec>,
+    #[allow(missing_docs)] // documentation missing in model
+    pub recipient: std::option::Option<crate::model::RecipientInfo>,
 }
 impl DecryptInput {
     /// <p>Ciphertext to be decrypted. The blob includes metadata.</p>
@@ -12211,6 +12272,10 @@ impl DecryptInput {
     ) -> std::option::Option<&crate::model::EncryptionAlgorithmSpec> {
         self.encryption_algorithm.as_ref()
     }
+    #[allow(missing_docs)] // documentation missing in model
+    pub fn recipient(&self) -> std::option::Option<&crate::model::RecipientInfo> {
+        self.recipient.as_ref()
+    }
 }
 impl std::fmt::Debug for DecryptInput {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -12220,6 +12285,7 @@ impl std::fmt::Debug for DecryptInput {
         formatter.field("grant_tokens", &self.grant_tokens);
         formatter.field("key_id", &self.key_id);
         formatter.field("encryption_algorithm", &self.encryption_algorithm);
+        formatter.field("recipient", &self.recipient);
         formatter.finish()
     }
 }

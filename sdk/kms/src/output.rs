@@ -2089,10 +2089,16 @@ impl GetKeyPolicyOutput {
 #[non_exhaustive]
 #[derive(std::clone::Clone, std::cmp::PartialEq)]
 pub struct GenerateRandomOutput {
+    #[allow(missing_docs)] // documentation missing in model
+    pub ciphertext_for_recipient: std::option::Option<aws_smithy_types::Blob>,
     /// <p>The random byte string. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>
     pub plaintext: std::option::Option<aws_smithy_types::Blob>,
 }
 impl GenerateRandomOutput {
+    #[allow(missing_docs)] // documentation missing in model
+    pub fn ciphertext_for_recipient(&self) -> std::option::Option<&aws_smithy_types::Blob> {
+        self.ciphertext_for_recipient.as_ref()
+    }
     /// <p>The random byte string. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>
     pub fn plaintext(&self) -> std::option::Option<&aws_smithy_types::Blob> {
         self.plaintext.as_ref()
@@ -2101,6 +2107,7 @@ impl GenerateRandomOutput {
 impl std::fmt::Debug for GenerateRandomOutput {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatter = f.debug_struct("GenerateRandomOutput");
+        formatter.field("ciphertext_for_recipient", &self.ciphertext_for_recipient);
         formatter.field("plaintext", &"*** Sensitive Data Redacted ***");
         formatter.finish()
     }
@@ -2111,9 +2118,23 @@ pub mod generate_random_output {
     #[non_exhaustive]
     #[derive(std::default::Default, std::clone::Clone, std::cmp::PartialEq, std::fmt::Debug)]
     pub struct Builder {
+        pub(crate) ciphertext_for_recipient: std::option::Option<aws_smithy_types::Blob>,
         pub(crate) plaintext: std::option::Option<aws_smithy_types::Blob>,
     }
     impl Builder {
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn ciphertext_for_recipient(mut self, input: aws_smithy_types::Blob) -> Self {
+            self.ciphertext_for_recipient = Some(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_ciphertext_for_recipient(
+            mut self,
+            input: std::option::Option<aws_smithy_types::Blob>,
+        ) -> Self {
+            self.ciphertext_for_recipient = input;
+            self
+        }
         /// <p>The random byte string. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>
         pub fn plaintext(mut self, input: aws_smithy_types::Blob) -> Self {
             self.plaintext = Some(input);
@@ -2127,6 +2148,7 @@ pub mod generate_random_output {
         /// Consumes the builder and constructs a [`GenerateRandomOutput`](crate::output::GenerateRandomOutput)
         pub fn build(self) -> crate::output::GenerateRandomOutput {
             crate::output::GenerateRandomOutput {
+                ciphertext_for_recipient: self.ciphertext_for_recipient,
                 plaintext: self.plaintext,
             }
         }
@@ -2584,6 +2606,8 @@ impl GenerateDataKeyPairOutput {
 pub struct GenerateDataKeyOutput {
     /// <p>The encrypted copy of the data key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>
     pub ciphertext_blob: std::option::Option<aws_smithy_types::Blob>,
+    #[allow(missing_docs)] // documentation missing in model
+    pub ciphertext_for_recipient: std::option::Option<aws_smithy_types::Blob>,
     /// <p>The plaintext data key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded. Use this data key to encrypt your data outside of KMS. Then, remove it from memory as soon as possible.</p>
     pub plaintext: std::option::Option<aws_smithy_types::Blob>,
     /// <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">key ARN</a>) of the KMS key that encrypted the data key.</p>
@@ -2593,6 +2617,10 @@ impl GenerateDataKeyOutput {
     /// <p>The encrypted copy of the data key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>
     pub fn ciphertext_blob(&self) -> std::option::Option<&aws_smithy_types::Blob> {
         self.ciphertext_blob.as_ref()
+    }
+    #[allow(missing_docs)] // documentation missing in model
+    pub fn ciphertext_for_recipient(&self) -> std::option::Option<&aws_smithy_types::Blob> {
+        self.ciphertext_for_recipient.as_ref()
     }
     /// <p>The plaintext data key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded. Use this data key to encrypt your data outside of KMS. Then, remove it from memory as soon as possible.</p>
     pub fn plaintext(&self) -> std::option::Option<&aws_smithy_types::Blob> {
@@ -2607,6 +2635,7 @@ impl std::fmt::Debug for GenerateDataKeyOutput {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatter = f.debug_struct("GenerateDataKeyOutput");
         formatter.field("ciphertext_blob", &self.ciphertext_blob);
+        formatter.field("ciphertext_for_recipient", &self.ciphertext_for_recipient);
         formatter.field("plaintext", &"*** Sensitive Data Redacted ***");
         formatter.field("key_id", &self.key_id);
         formatter.finish()
@@ -2619,6 +2648,7 @@ pub mod generate_data_key_output {
     #[derive(std::default::Default, std::clone::Clone, std::cmp::PartialEq, std::fmt::Debug)]
     pub struct Builder {
         pub(crate) ciphertext_blob: std::option::Option<aws_smithy_types::Blob>,
+        pub(crate) ciphertext_for_recipient: std::option::Option<aws_smithy_types::Blob>,
         pub(crate) plaintext: std::option::Option<aws_smithy_types::Blob>,
         pub(crate) key_id: std::option::Option<std::string::String>,
     }
@@ -2634,6 +2664,19 @@ pub mod generate_data_key_output {
             input: std::option::Option<aws_smithy_types::Blob>,
         ) -> Self {
             self.ciphertext_blob = input;
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn ciphertext_for_recipient(mut self, input: aws_smithy_types::Blob) -> Self {
+            self.ciphertext_for_recipient = Some(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_ciphertext_for_recipient(
+            mut self,
+            input: std::option::Option<aws_smithy_types::Blob>,
+        ) -> Self {
+            self.ciphertext_for_recipient = input;
             self
         }
         /// <p>The plaintext data key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded. Use this data key to encrypt your data outside of KMS. Then, remove it from memory as soon as possible.</p>
@@ -2660,6 +2703,7 @@ pub mod generate_data_key_output {
         pub fn build(self) -> crate::output::GenerateDataKeyOutput {
             crate::output::GenerateDataKeyOutput {
                 ciphertext_blob: self.ciphertext_blob,
+                ciphertext_for_recipient: self.ciphertext_for_recipient,
                 plaintext: self.plaintext,
                 key_id: self.key_id,
             }
@@ -3182,6 +3226,8 @@ impl DeleteAliasOutput {
 #[non_exhaustive]
 #[derive(std::clone::Clone, std::cmp::PartialEq)]
 pub struct DecryptOutput {
+    #[allow(missing_docs)] // documentation missing in model
+    pub ciphertext_for_recipient: std::option::Option<aws_smithy_types::Blob>,
     /// <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">key ARN</a>) of the KMS key that was used to decrypt the ciphertext.</p>
     pub key_id: std::option::Option<std::string::String>,
     /// <p>Decrypted plaintext data. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>
@@ -3190,6 +3236,10 @@ pub struct DecryptOutput {
     pub encryption_algorithm: std::option::Option<crate::model::EncryptionAlgorithmSpec>,
 }
 impl DecryptOutput {
+    #[allow(missing_docs)] // documentation missing in model
+    pub fn ciphertext_for_recipient(&self) -> std::option::Option<&aws_smithy_types::Blob> {
+        self.ciphertext_for_recipient.as_ref()
+    }
     /// <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">key ARN</a>) of the KMS key that was used to decrypt the ciphertext.</p>
     pub fn key_id(&self) -> std::option::Option<&str> {
         self.key_id.as_deref()
@@ -3208,6 +3258,7 @@ impl DecryptOutput {
 impl std::fmt::Debug for DecryptOutput {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatter = f.debug_struct("DecryptOutput");
+        formatter.field("ciphertext_for_recipient", &self.ciphertext_for_recipient);
         formatter.field("key_id", &self.key_id);
         formatter.field("plaintext", &"*** Sensitive Data Redacted ***");
         formatter.field("encryption_algorithm", &self.encryption_algorithm);
@@ -3220,11 +3271,25 @@ pub mod decrypt_output {
     #[non_exhaustive]
     #[derive(std::default::Default, std::clone::Clone, std::cmp::PartialEq, std::fmt::Debug)]
     pub struct Builder {
+        pub(crate) ciphertext_for_recipient: std::option::Option<aws_smithy_types::Blob>,
         pub(crate) key_id: std::option::Option<std::string::String>,
         pub(crate) plaintext: std::option::Option<aws_smithy_types::Blob>,
         pub(crate) encryption_algorithm: std::option::Option<crate::model::EncryptionAlgorithmSpec>,
     }
     impl Builder {
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn ciphertext_for_recipient(mut self, input: aws_smithy_types::Blob) -> Self {
+            self.ciphertext_for_recipient = Some(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_ciphertext_for_recipient(
+            mut self,
+            input: std::option::Option<aws_smithy_types::Blob>,
+        ) -> Self {
+            self.ciphertext_for_recipient = input;
+            self
+        }
         /// <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">key ARN</a>) of the KMS key that was used to decrypt the ciphertext.</p>
         pub fn key_id(mut self, input: impl Into<std::string::String>) -> Self {
             self.key_id = Some(input.into());
@@ -3264,6 +3329,7 @@ pub mod decrypt_output {
         /// Consumes the builder and constructs a [`DecryptOutput`](crate::output::DecryptOutput)
         pub fn build(self) -> crate::output::DecryptOutput {
             crate::output::DecryptOutput {
+                ciphertext_for_recipient: self.ciphertext_for_recipient,
                 key_id: self.key_id,
                 plaintext: self.plaintext,
                 encryption_algorithm: self.encryption_algorithm,

@@ -179,7 +179,9 @@ impl Client {
     ///   - [`grant_tokens(Vec<String>)`](crate::client::fluent_builders::Decrypt::grant_tokens) / [`set_grant_tokens(Option<Vec<String>>)`](crate::client::fluent_builders::Decrypt::set_grant_tokens): <p>A list of grant tokens. </p>  <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token">Grant token</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token">Using a grant token</a> in the <i>Key Management Service Developer Guide</i>.</p>
     ///   - [`key_id(impl Into<String>)`](crate::client::fluent_builders::Decrypt::key_id) / [`set_key_id(Option<String>)`](crate::client::fluent_builders::Decrypt::set_key_id): <p>Specifies the KMS key that KMS uses to decrypt the ciphertext.</p>  <p>Enter a key ID of the KMS key that was used to encrypt the ciphertext. If you identify a different KMS key, the <code>Decrypt</code> operation throws an <code>IncorrectKeyException</code>.</p>  <p>This parameter is required only when the ciphertext was encrypted under an asymmetric KMS key. If you used a symmetric encryption KMS key, KMS can get the KMS key from metadata that it adds to the symmetric ciphertext blob. However, it is always recommended as a best practice. This practice ensures that you use the KMS key that you intend.</p>  <p>To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>. To specify a KMS key in a different Amazon Web Services account, you must use the key ARN or alias ARN.</p>  <p>For example:</p>  <ul>   <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li>   <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li>   <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li>   <li> <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code> </p> </li>  </ul>  <p>To get the key ID and key ARN for a KMS key, use <code>ListKeys</code> or <code>DescribeKey</code>. To get the alias name and alias ARN, use <code>ListAliases</code>.</p>
     ///   - [`encryption_algorithm(EncryptionAlgorithmSpec)`](crate::client::fluent_builders::Decrypt::encryption_algorithm) / [`set_encryption_algorithm(Option<EncryptionAlgorithmSpec>)`](crate::client::fluent_builders::Decrypt::set_encryption_algorithm): <p>Specifies the encryption algorithm that will be used to decrypt the ciphertext. Specify the same algorithm that was used to encrypt the data. If you specify a different algorithm, the <code>Decrypt</code> operation fails.</p>  <p>This parameter is required only when the ciphertext was encrypted under an asymmetric KMS key. The default value, <code>SYMMETRIC_DEFAULT</code>, represents the only supported algorithm that is valid for symmetric encryption KMS keys.</p>
+    ///   - [`recipient(RecipientInfo)`](crate::client::fluent_builders::Decrypt::recipient) / [`set_recipient(Option<RecipientInfo>)`](crate::client::fluent_builders::Decrypt::set_recipient): (undocumented)
     /// - On success, responds with [`DecryptOutput`](crate::output::DecryptOutput) with field(s):
+    ///   - [`ciphertext_for_recipient(Option<Blob>)`](crate::output::DecryptOutput::ciphertext_for_recipient): (undocumented)
     ///   - [`key_id(Option<String>)`](crate::output::DecryptOutput::key_id): <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">key ARN</a>) of the KMS key that was used to decrypt the ciphertext.</p>
     ///   - [`plaintext(Option<Blob>)`](crate::output::DecryptOutput::plaintext): <p>Decrypted plaintext data. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>
     ///   - [`encryption_algorithm(Option<EncryptionAlgorithmSpec>)`](crate::output::DecryptOutput::encryption_algorithm): <p>The encryption algorithm that was used to decrypt the ciphertext.</p>
@@ -315,10 +317,12 @@ impl Client {
     ///   - [`key_id(impl Into<String>)`](crate::client::fluent_builders::GenerateDataKey::key_id) / [`set_key_id(Option<String>)`](crate::client::fluent_builders::GenerateDataKey::set_key_id): <p>Specifies the symmetric encryption KMS key that encrypts the data key. You cannot specify an asymmetric KMS key or a KMS key in a custom key store. To get the type and origin of your KMS key, use the <code>DescribeKey</code> operation.</p>  <p>To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>. To specify a KMS key in a different Amazon Web Services account, you must use the key ARN or alias ARN.</p>  <p>For example:</p>  <ul>   <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li>   <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li>   <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li>   <li> <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code> </p> </li>  </ul>  <p>To get the key ID and key ARN for a KMS key, use <code>ListKeys</code> or <code>DescribeKey</code>. To get the alias name and alias ARN, use <code>ListAliases</code>.</p>
     ///   - [`encryption_context(HashMap<String, String>)`](crate::client::fluent_builders::GenerateDataKey::encryption_context) / [`set_encryption_context(Option<HashMap<String, String>>)`](crate::client::fluent_builders::GenerateDataKey::set_encryption_context): <p>Specifies the encryption context that will be used when encrypting the data key.</p>  <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>  <p>For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>
     ///   - [`number_of_bytes(i32)`](crate::client::fluent_builders::GenerateDataKey::number_of_bytes) / [`set_number_of_bytes(Option<i32>)`](crate::client::fluent_builders::GenerateDataKey::set_number_of_bytes): <p>Specifies the length of the data key in bytes. For example, use the value 64 to generate a 512-bit data key (64 bytes is 512 bits). For 128-bit (16-byte) and 256-bit (32-byte) data keys, use the <code>KeySpec</code> parameter.</p>  <p>You must specify either the <code>KeySpec</code> or the <code>NumberOfBytes</code> parameter (but not both) in every <code>GenerateDataKey</code> request.</p>
+    ///   - [`recipient(RecipientInfo)`](crate::client::fluent_builders::GenerateDataKey::recipient) / [`set_recipient(Option<RecipientInfo>)`](crate::client::fluent_builders::GenerateDataKey::set_recipient): (undocumented)
     ///   - [`key_spec(DataKeySpec)`](crate::client::fluent_builders::GenerateDataKey::key_spec) / [`set_key_spec(Option<DataKeySpec>)`](crate::client::fluent_builders::GenerateDataKey::set_key_spec): <p>Specifies the length of the data key. Use <code>AES_128</code> to generate a 128-bit symmetric key, or <code>AES_256</code> to generate a 256-bit symmetric key.</p>  <p>You must specify either the <code>KeySpec</code> or the <code>NumberOfBytes</code> parameter (but not both) in every <code>GenerateDataKey</code> request.</p>
     ///   - [`grant_tokens(Vec<String>)`](crate::client::fluent_builders::GenerateDataKey::grant_tokens) / [`set_grant_tokens(Option<Vec<String>>)`](crate::client::fluent_builders::GenerateDataKey::set_grant_tokens): <p>A list of grant tokens.</p>  <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token">Grant token</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token">Using a grant token</a> in the <i>Key Management Service Developer Guide</i>.</p>
     /// - On success, responds with [`GenerateDataKeyOutput`](crate::output::GenerateDataKeyOutput) with field(s):
     ///   - [`ciphertext_blob(Option<Blob>)`](crate::output::GenerateDataKeyOutput::ciphertext_blob): <p>The encrypted copy of the data key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>
+    ///   - [`ciphertext_for_recipient(Option<Blob>)`](crate::output::GenerateDataKeyOutput::ciphertext_for_recipient): (undocumented)
     ///   - [`plaintext(Option<Blob>)`](crate::output::GenerateDataKeyOutput::plaintext): <p>The plaintext data key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded. Use this data key to encrypt your data outside of KMS. Then, remove it from memory as soon as possible.</p>
     ///   - [`key_id(Option<String>)`](crate::output::GenerateDataKeyOutput::key_id): <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">key ARN</a>) of the KMS key that encrypted the data key.</p>
     /// - On failure, responds with [`SdkError<GenerateDataKeyError>`](crate::error::GenerateDataKeyError)
@@ -397,7 +401,9 @@ impl Client {
     /// - The fluent builder is configurable:
     ///   - [`number_of_bytes(i32)`](crate::client::fluent_builders::GenerateRandom::number_of_bytes) / [`set_number_of_bytes(Option<i32>)`](crate::client::fluent_builders::GenerateRandom::set_number_of_bytes): <p>The length of the byte string.</p>
     ///   - [`custom_key_store_id(impl Into<String>)`](crate::client::fluent_builders::GenerateRandom::custom_key_store_id) / [`set_custom_key_store_id(Option<String>)`](crate::client::fluent_builders::GenerateRandom::set_custom_key_store_id): <p>Generates the random byte string in the CloudHSM cluster that is associated with the specified <a href="https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html">custom key store</a>. To find the ID of a custom key store, use the <code>DescribeCustomKeyStores</code> operation.</p>
+    ///   - [`recipient(RecipientInfo)`](crate::client::fluent_builders::GenerateRandom::recipient) / [`set_recipient(Option<RecipientInfo>)`](crate::client::fluent_builders::GenerateRandom::set_recipient): (undocumented)
     /// - On success, responds with [`GenerateRandomOutput`](crate::output::GenerateRandomOutput) with field(s):
+    ///   - [`ciphertext_for_recipient(Option<Blob>)`](crate::output::GenerateRandomOutput::ciphertext_for_recipient): (undocumented)
     ///   - [`plaintext(Option<Blob>)`](crate::output::GenerateRandomOutput::plaintext): <p>The random byte string. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>
     /// - On failure, responds with [`SdkError<GenerateRandomError>`](crate::error::GenerateRandomError)
     pub fn generate_random(&self) -> fluent_builders::GenerateRandom {
@@ -1872,6 +1878,19 @@ pub mod fluent_builders {
             self.inner = self.inner.set_encryption_algorithm(input);
             self
         }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn recipient(mut self, input: crate::model::RecipientInfo) -> Self {
+            self.inner = self.inner.recipient(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_recipient(
+            mut self,
+            input: std::option::Option<crate::model::RecipientInfo>,
+        ) -> Self {
+            self.inner = self.inner.set_recipient(input);
+            self
+        }
     }
     /// Fluent builder constructing a request to `DeleteAlias`.
     ///
@@ -2998,6 +3017,19 @@ pub mod fluent_builders {
             self.inner = self.inner.set_number_of_bytes(input);
             self
         }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn recipient(mut self, input: crate::model::RecipientInfo) -> Self {
+            self.inner = self.inner.recipient(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_recipient(
+            mut self,
+            input: std::option::Option<crate::model::RecipientInfo>,
+        ) -> Self {
+            self.inner = self.inner.set_recipient(input);
+            self
+        }
         /// <p>Specifies the length of the data key. Use <code>AES_128</code> to generate a 128-bit symmetric key, or <code>AES_256</code> to generate a 256-bit symmetric key.</p>
         /// <p>You must specify either the <code>KeySpec</code> or the <code>NumberOfBytes</code> parameter (but not both) in every <code>GenerateDataKey</code> request.</p>
         pub fn key_spec(mut self, input: crate::model::DataKeySpec) -> Self {
@@ -3662,6 +3694,19 @@ pub mod fluent_builders {
             input: std::option::Option<std::string::String>,
         ) -> Self {
             self.inner = self.inner.set_custom_key_store_id(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn recipient(mut self, input: crate::model::RecipientInfo) -> Self {
+            self.inner = self.inner.recipient(input);
+            self
+        }
+        #[allow(missing_docs)] // documentation missing in model
+        pub fn set_recipient(
+            mut self,
+            input: std::option::Option<crate::model::RecipientInfo>,
+        ) -> Self {
+            self.inner = self.inner.set_recipient(input);
             self
         }
     }

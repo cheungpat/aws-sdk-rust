@@ -1282,6 +1282,13 @@ pub fn deser_operation_crate_operation_decrypt(
             Some(aws_smithy_json::deserialize::Token::EndObject { .. }) => break,
             Some(aws_smithy_json::deserialize::Token::ObjectKey { key, .. }) => {
                 match key.to_unescaped()?.as_ref() {
+                    "CiphertextForRecipient" => {
+                        builder = builder.set_ciphertext_for_recipient(
+                            aws_smithy_json::deserialize::token::expect_blob_or_null(
+                                tokens.next(),
+                            )?,
+                        );
+                    }
                     "KeyId" => {
                         builder = builder.set_key_id(
                             aws_smithy_json::deserialize::token::expect_string_or_null(
@@ -1592,6 +1599,13 @@ pub fn deser_operation_crate_operation_generate_data_key(
                 match key.to_unescaped()?.as_ref() {
                     "CiphertextBlob" => {
                         builder = builder.set_ciphertext_blob(
+                            aws_smithy_json::deserialize::token::expect_blob_or_null(
+                                tokens.next(),
+                            )?,
+                        );
+                    }
+                    "CiphertextForRecipient" => {
+                        builder = builder.set_ciphertext_for_recipient(
                             aws_smithy_json::deserialize::token::expect_blob_or_null(
                                 tokens.next(),
                             )?,
@@ -1908,6 +1922,13 @@ pub fn deser_operation_crate_operation_generate_random(
             Some(aws_smithy_json::deserialize::Token::EndObject { .. }) => break,
             Some(aws_smithy_json::deserialize::Token::ObjectKey { key, .. }) => {
                 match key.to_unescaped()?.as_ref() {
+                    "CiphertextForRecipient" => {
+                        builder = builder.set_ciphertext_for_recipient(
+                            aws_smithy_json::deserialize::token::expect_blob_or_null(
+                                tokens.next(),
+                            )?,
+                        );
+                    }
                     "Plaintext" => {
                         builder = builder.set_plaintext(
                             aws_smithy_json::deserialize::token::expect_blob_or_null(

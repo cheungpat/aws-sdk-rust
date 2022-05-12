@@ -1001,8 +1001,8 @@ model_hash = '80e10c46688efc422b32fc1a12f62ef7a60456f11a85922195bc9b167bf65c9d'
 [crates.aws-sdk-kms]
 category = 'AwsSdk'
 version = '0.11.0'
-source_hash = '366528c5e1944d15086ad1a9130be502f7b197cca57c5459b2a783f31c953724'
-model_hash = 'a205aca0cd2d6964db221f5212bd74ab4daf4ff416c7657d6ae486c23c3ef48b'
+source_hash = '2e114cf3f50dfea16979aae07a6ef62e57fa1d9208797e32c4959eb0605fe23d'
+model_hash = '52941699bc889d4b78e51daf4cd4582e5b8572d6831c875f426ab79382e6006b'
 
 [crates.aws-sdk-lakeformation]
 category = 'AwsSdk'
